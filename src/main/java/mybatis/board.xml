@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "board">
+<insert id="insertBoard" parameterType="board">
+insert into board   "
+  + "  values  (boardseq.nextval ,#{name},#{pass},
+      #{subject},#{content},#{file1},sysdate,0,#{boardid})
+</insert>
+
+<select id = "boardList" parameterType="map" resultType="board">
+select * from( 
+                select rownum rnum, a.* from(
+         		 select * from board where boardid = #{boardid}
+         		order by num desc) a)
+         		 where rnum between #{start} and #{end}
+
+
+</select>
+
+<select id = "boardCount" resultType="int" parameterType="string">
+
+select nvl (count(*),0) from board where boardid = #{boardid}
+
+</select>
+
+<select id = "oneBoard"  parameterType ="int" resultType="board" >
+
+select * from board where num = #{num}
+
+
+</select>
+
+<update id="updateBoard" parameterType="board">
+
+
+update board set name=#{name},subject=#{subject},content=#{content},file1=#{file1} where num =#{num}
+
+ </update>
+ 
+ <delete id="boardDelete" parameterType="int">
+ 
+ delete from board where num =#{num}
+ 
+ 
+ </delete>
+ <insert id="insertComment" parameterType="map">
+    insert into boardcomment values (boardcomseq.nextval, #{num}, #{comment}, sysdate)
+</insert>
+
+<select id ="commentList" parameterType="int" resultType="comment">
+
+select * from boardcomment where num=#{num} order by regdate desc
+
+</select>
+
+
+
+
+
+
+</mapper>
