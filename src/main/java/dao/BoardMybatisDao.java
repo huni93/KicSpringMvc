@@ -31,9 +31,9 @@ public class BoardMybatisDao {
 	      	
 	   	        
 	      
-	         int num = sqlSession.insert(NS+"insertBoard",board);
-	         sqlSession.commit();
-	         return num;
+	        
+	       
+	         return sqlSession.insert(NS+"insertBoard",board);
 	                  
 	   }
 	 

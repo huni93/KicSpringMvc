@@ -30,7 +30,7 @@
 </div>
 <div class="form-group">
     <label for="file">파일:${board.file1}</label>
-    <input type="file" class="form-control" id="file" name="file1">
+    <input type="file" class="form-control" id="file" name="f">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
